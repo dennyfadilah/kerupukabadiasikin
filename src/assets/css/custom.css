@@ -1,0 +1,15 @@
+tr.group,
+tr.group:hover {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+:root.dark tr.group,
+:root.dark tr.group:hover {
+  background-color: rgba(0, 0, 0, 0.75) !important;
+}
+
+div.dt-paging {
+  float: right;
+  margin-top: 0.5em;
+  clear: both;
+}

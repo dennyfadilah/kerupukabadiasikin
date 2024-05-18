@@ -1,0 +1,9 @@
+# Aktifkan mod_rewrite
+RewriteEngine On
+
+# Periksa apakah permintaan bukan untuk file fisik yang ada
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Aturan rewrite untuk mengubah URL ke index.php?page=$1
+RewriteRule ^([^/]+)/?$ index.php?page=$1 [QSA,L]
