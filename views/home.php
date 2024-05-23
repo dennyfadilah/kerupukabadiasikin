@@ -110,13 +110,11 @@
 <!-- Content Row -->
 
 <!-- Area Chart -->
-<div class="">
-    <div class="card shadow mb-4">
-        <!-- Card Body -->
-        <div class="card-body text-center pt-0">
-            <div class="chart-area">
-                <canvas id="chart-penjualan"></canvas>
-            </div>
+<div class="card shadow mb-4">
+    <!-- Card Body -->
+    <div class="card-body text-center overflow-auto pt-0">
+        <div class="chart-area" style="overflow: auto; height: 400px;">
+            <canvas id="chart-penjualan" style="width: 100%; height: 100%;"></canvas>
         </div>
     </div>
 </div>
