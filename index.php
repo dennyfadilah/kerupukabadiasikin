@@ -5,22 +5,12 @@ require_once 'routes/web.php';
 require_once 'main.php';
 require_once 'controllers/AuthController.php';
 
-
-$_SESSION['last_activity'] = time();
-
-if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 1800)) {
-    logout();
-}
-
-session_set_cookie_params(1800);
 session_start();
-
 
 $env = parse_ini_file('.env');
 $auth = ['login', 'register'];
 
 $requestUrl = $_SERVER['REQUEST_URI'];
-
 
 // Cari substring setelah direktori
 $url = strstr($requestUrl, $dir);
