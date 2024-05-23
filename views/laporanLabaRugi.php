@@ -18,7 +18,7 @@ $bulan = [
 $bulan_tahun = $bulan[date('m', strtotime($periode))] . ' ' . date('Y', strtotime($periode));
 ?>
 
-<div class="card col-7 mb-4">
+<div class="card col-md-7 mb-4">
     <div class="card-body">
         <div class="d-md-flex align-items-center justify-content-between mb-4">
 
