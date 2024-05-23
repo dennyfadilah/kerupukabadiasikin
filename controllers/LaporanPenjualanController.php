@@ -100,6 +100,14 @@ function exportToPDFPenjualan($periode = null)
         $pdf->Cell(270, 8, 'Tidak ada data', 1, 1, 'C');
     }
 
+    $resultTotal = mysqli_query($koneksi, 'SELECT SUM(subtotal) as subtotal, SUM(diskon) as diskon, SUM(harga_total) as htotal FROM penjualan WHERE MONTH(tanggal) = ' . date('m', strtotime($periode)) . ' AND YEAR(tanggal) = ' . date('Y', strtotime($periode)));
+
+    $rowTotal = mysqli_fetch_array($resultTotal, MYSQLI_ASSOC);
+    
+    $pdf->Cell(190, 10, 'Total', 1, 0, 'C');
+    $pdf->Cell(30, 10, 'Rp ' . number_format(($rowTotal['subtotal'] ?? 0), 0, ',', '.'), 1, 0, 'C');
+    $pdf->Cell(25, 10, 'Rp ' . number_format(($rowTotal['diskon'] ?? 0), 0, ',', '.'), 1, 0, 'C');
+    $pdf->Cell(30, 10, 'Rp ' . number_format(($rowTotal['htotal'] ?? 0), 0, ',', '.'), 1, 0, 'C');
 
     // Output PDF
     header('Content-Type: application/pdf');
@@ -189,6 +197,18 @@ function exportToExcelPenjualan($periode = null)
               </tr>';
         $no++;
     }
+
+    $resultTotal = mysqli_query($koneksi, 'SELECT SUM(subtotal) as subtotal, SUM(diskon) as diskon, SUM(harga_total) as htotal FROM penjualan WHERE MONTH(tanggal) = ' . date('m', strtotime($periode)) . ' AND YEAR(tanggal) = ' . date('Y', strtotime($periode)));
+    
+    $rowTotal = mysqli_fetch_array($resultTotal, MYSQLI_ASSOC);
+    
+    echo '<tr>
+        <th style="text-align: right;" colspan="7" data-dt-order="disable">Total</th>
+        <th style="text-align: right;" data-dt-order="disable">Rp ' . number_format($rowTotal['subtotal'], 0, ',', '.') . '</th>
+        <th style="text-align: right;" data-dt-order="disable">Rp ' . number_format($rowTotal['diskon'], 0, ',', '.') . '</th>
+        <th style="text-align: right;" data-dt-order="disable">Rp ' . number_format($rowTotal['htotal'], 0, ',', '.') . '</th>
+      </tr>';
+    
     echo '</table>';
 
     // Selesai menulis, tutup koneksi dan hentikan script
